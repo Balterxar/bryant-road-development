@@ -140,8 +140,6 @@ Together, we can continue making our voices heard and protect our neighborhood.
 
 </div>
 
-<div class="container">
-
 <div class="section contact-form-section">
 <!-- Contact Form Section -->
 <div class="section">
@@ -179,35 +177,7 @@ Together, we can continue making our voices heard and protect our neighborhood.
 	* Required fields. Your information will be sent to haleykly@gmail.com and added to the Opposed Neighbors list.
 	</p>
 
-</div>
-<script>
-// Confirmation message after form submit
-document.addEventListener('DOMContentLoaded', function() {
-	var form = document.getElementById('contactForm');
-	var confirmation = document.getElementById('formConfirmation');
-	if(form) {
-		form.addEventListener('submit', function(e) {
-			e.preventDefault();
-			var data = new FormData(form);
-			fetch(form.action, {
-				method: 'POST',
-				body: data,
-			})..then(function(response) {
-    if(response.ok){
-        form.style.display = 'none';
-        confirmation.style.display = 'block';
-    } else {
-        throw new Error("Network response was not ok");
-    }
-}).catch(function(error) {
-				confirmation.style.display = 'block';
-				confirmation.style.color = 'red';
-				confirmation.textContent = 'There was an error submitting the form. Please try again later.';
-			});
-		});
-	}
-});
-</script>
+
 </div>
 
 <div class="container">
