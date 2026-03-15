@@ -278,14 +278,16 @@ document.getElementById("contactForm").addEventListener("submit", function(e){
 		body:formData
 	})
 	.then(response => response.text())
-	.then(data => {
+.then(data => {
 
-		document.getElementById("formStatus").innerText =
-		"Thank you! Your information has been submitted.";
+  const status = document.getElementById("formStatus");
 
-		document.getElementById("contactForm").reset();
+  status.innerText = "Thank you! Your information has been submitted.";
+  status.style.color = "green";
 
-	})
+  document.getElementById("contactForm").reset();
+
+})
 	.catch(error => {
 
 		document.getElementById("formStatus").innerText =
