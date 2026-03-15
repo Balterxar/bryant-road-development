@@ -165,9 +165,9 @@ Together, we can continue making our voices heard and protect our neighborhood.
 		<label for="message">Message</label><br>
 		<textarea id="message" name="message" rows="4" style="width:100%;padding:8px;margin-bottom:10px;"></textarea><br>
 
-		<button type="submit" style="background:#2563eb;color:white;padding:10px 20px;border:none;border-radius:5px;font-size:16px;">
-			Send
-		</button>
+		<button id="submitButton" type="submit" style="background:#2563eb;color:white;padding:10px 20px;border:none;border-radius:5px;font-size:16px;">
+Send
+</button>
 
 	</form>
 
@@ -271,27 +271,37 @@ document.getElementById("contactForm").addEventListener("submit", function(e){
 
 	e.preventDefault();
 
-	const formData = new FormData(this);
+	const form = document.getElementById("contactForm");
+	const button = document.getElementById("submitButton");
+	const status = document.getElementById("formStatus");
+
+	const formData = new FormData(form);
+
+	button.disabled = true;
+	button.innerText = "Sending...";
+	status.style.color = "#555";
+	status.innerText = "Submitting your information...";
 
 	fetch(scriptURL,{
 		method:"POST",
 		body:formData
 	})
 	.then(response => response.text())
-.then(data => {
+	.then(data => {
 
-  const status = document.getElementById("formStatus");
+		status.innerText = "Thank you! Your information has been submitted.";
+		status.style.color = "green";
 
-  status.innerText = "Thank you! Your information has been submitted.";
-  status.style.color = "green";
-
-  document.getElementById("contactForm").reset();
-
-})
+		form.reset();
+		button.innerText = "Submitted";
+	})
 	.catch(error => {
 
-		document.getElementById("formStatus").innerText =
-		"There was an error submitting the form. Please try again later.";
+		status.innerText = "There was an error submitting the form. Please try again later.";
+		status.style.color = "red";
+
+		button.disabled = false;
+		button.innerText = "Send";
 
 	});
 
